@@ -1,0 +1,217 @@
+
+PREFIX unidata: <http://uni.io/data#> 
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX uni: <http://uni.io/schema#> 
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX dbr: <http://dbpedia.org/resource/> 
+PREFIX un: <http://www.w3.org/2007/ont/unit#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+
+
+1)what is the name and credit of subject COMP 6741?
+
+SELECT ?name ?credit
+WHERE {
+  	?course dcmitype:subject "COMP" .
+    ?course dcmitype:identifier "6741" .
+	?course dcterms:title ?name .
+	?course uni:hasCredit ?credit.
+}
+
+2)Which course is James competent in?
+SELECT ?cname
+WHERE{
+  	?student foaf:givenName "Joe".
+  	?student uni:hasRecord ?rec.
+  	?rec dcterms:title ?cid.
+  	?cid dcterms:title ?cname.
+  	?rec uni:hasGot ?grade.
+	FILTER (?grade != "F").
+ }
+
+
+3)Which topics is covered in lecture 3 of COMP 6741?
+SELECT ?topic ?tname
+WHERE {
+  	?course dcmitype:subject "COMP" .
+   	?course dcmitype:identifier "6741" .
+	?lecture dcterms:isPartOf ?course .
+  	?lecture dcmitype:identifier "3" .
+	?lecture uni:hasResource ?res.
+  	?res uni:hasTopic ?topic.
+  	?topic rdfs:label ?tname
+
+}
+
+4)What is the outline for COMP 6721 ?
+SELECT  ?outline
+WHERE {
+  	?course dcmitype:subject "COMP" .
+  	?course dcmitype:identifier "6721" .
+  	?course uni:hasOutline ?content .
+	?content dcterms:type "OUTLINE" .
+    ?content dcterms:source ?outline .
+}
+
+5)What are the recommended reading materials for INTELLIGENT SYSTEMS?
+SELECT  ?Reading
+WHERE {
+  	?courseid dcterms:title "INTELLIGENT SYSTEMS"@en.
+  	?courseid rdf:type uni:Course .	
+  	?lectureid dcterms:isPartOf ?courseid.  	
+  	?lectureid uni:hasResource ?content.
+  	?content dcterms:type "READING".
+    ?content dcterms:source ?Reading.
+}
+
+
+
+6) Who enrolled in COMP 6741 and what grade they got?
+
+SELECT ?firstname ?lastName ?title ?grade
+WHERE{
+
+  	?course dcmitype:subject "COMP" .
+ 	?course dcmitype:identifier "6741".
+  	?course dcterms:title ?title.
+  	?student uni:studyAt uni:Concordia_University.
+  	?student uni:hasRecord ?rec.
+  	?rec dcterms:title ?course.
+  	?rec uni:hasGot ?grade.
+  	?student foaf:givenName ?firstname.
+  	?student foaf:familyName ?lastName.
+}
+
+
+
+7) How many course offered in COMP Department?
+SELECT (count(?course) as ?courseCount)
+WHERE{
+  
+  	?course dcmitype:subject "COMP" .
+  	?course rdf:type uni:Course.
+  	
+}
+
+8) Is James competent in INTELLIGENT SYSTEMS?
+
+ASK{
+ 	?course dcterms:title "INTELLIGENT SYSTEMS"@en.
+  	?student uni:hasRecord ?rec.
+  	?rec dcterms:title ?course.
+  	?student foaf:givenName "James".
+  	?rec uni:hasGot ?grade.
+	FILTER (?grade != "F")
+}
+
+9) What is the maximum credit for any course offered by concordia university?
+
+SELECT (MAX(?credit) as ?courseCredit)
+WHERE {
+	?course rdf:type uni:Course.
+  	?course dcterms:isPartOf unidata:Concordia_University.
+	?course uni:hasCredit ?credit
+}
+
+10) what is the grade of James Cook in COMP 6741.
+SELECT ?grade
+
+WHERE{
+  	?sid foaf:givenName "James".
+  	?sid foaf:familyName "Cook".
+  	?cid dcmitype:subject "COMP".
+  	?cid dcmitype:identifier "6741".
+  	?sid uni:hasRecord ?rec.
+  	?rec dcterms:title ?cid.
+  	?rec uni:hasGot ?grade.
+}
+
+
+
+11) What is COMP 6741 about?
+SELECT ?cname ?desc
+WHERE {
+  	?course dcmitype:subject "COMP" .
+   	?course dcmitype:identifier "6741" .
+  	?course dcterms:title ?cname.
+  	?course dcterms:description ?desc.
+}
+
+13)Which topics are covered in Lab 2 of COMP 6741?
+SELECT ?topic ?tname
+WHERE {
+  	?course dcmitype:subject "COMP" .
+   	?course dcmitype:identifier "6741" .
+	?lab dcterms:isPartOf ?course .
+  	?lab dcmitype:identifier "2" .
+  	?lab rdf:type uni:Lab.
+	?lab uni:hasResource ?res.
+  	?res uni:hasTopic ?topic.
+  	?topic rdfs:label ?tname.
+}
+
+14) Which courses cover Expert Systems?
+
+SELECT ?cname (count (?cname) as ?count)
+WHERE {
+    ?course dcterms:isPartOf unidata:Concordia_University.
+  	?course dcterms:title ?cname.
+  	?event dcterms:isPartOf ?course.
+  	?event uni:hasResource ?con.
+  	?con uni:hasTopic ?topic.
+  	?topic rdfs:label "Expert Systems".
+}GROUP BY ?cname ORDER BY DESC(?count)
+
+
+Extra Query
+14)Which course and topics is Robert competent in?
+SELECT ?cname ?tname
+WHERE{
+  	?student foaf:givenName "Joe".
+  	?student uni:hasRecord ?rec.
+  	?rec dcterms:title ?cid.
+  	?cid dcterms:title ?cname.
+  	?rec uni:hasGot ?grade.
+	FILTER (?grade != "F").
+  	?lecture dcterms:isPartOf ?cid .
+  	?lecture uni:hasResource ?res.
+  	?res uni:hasTopic ?topic.
+  	?topic rdfs:label ?tname.
+  	?topic rdf:type "ORG".
+}
+
+Sparql
+2) For a given topic list all the course where they appeared, together with count
+
+SELECT ?cname (count (?cname) as ?count)
+WHERE {
+    ?course dcterms:isPartOf unidata:Concordia_University.
+   ?course dcterms:title ?cname.
+   ?event dcterms:isPartOf ?course.
+   ?event uni:hasResource ?con.
+   ?con uni:hasTopic ?topic.
+   ?topic rdfs:label "Expert Systems".
+}GROUP BY ?cname ORDER BY DESC(?count)
+
+
+
+no of corses
+SELECT DISTINCT ?course
+WHERE{
+ ?course dcterms:isPartOf unidata:Concordia_University.
+
+}
+
+no of event
+
+SELECT DISTINCT ?event
+WHERE{
+ ?course dcterms:isPartOf unidata:Concordia_University.
+  ?event dcterms:isPartOf ?course.
+
+}
+
+no. of topics
