@@ -1,0 +1,12 @@
+Intelligent System - Project 1
+
+Files:
+Dataset: all the csv files related to the project
+Knowledgebuilder.py: python file to generate knowledge graph
+Report: COMP_6741 Project Report.pdf
+
+#How to run
+
+Place University folder in the Fuseki server /webapp folder.
+Start the Fuseki server (localhost:3030)
+Load the knowledge_base123.nt file in Apache Fuseki
