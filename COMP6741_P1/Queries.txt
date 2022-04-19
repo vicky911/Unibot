@@ -1,0 +1,125 @@
+
+PREFIX unidata: <http://uni.io/data#> 
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX uni: <http://uni.io/schema#> 
+PREFIX dbo: <http://dbpedia.org/ontology/> 
+PREFIX dbr: <http://dbpedia.org/resource/> 
+PREFIX un: <http://www.w3.org/2007/ont/unit#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+
+
+1)what is the name and credit unit of subject COMP6741?
+
+SELECT ?name ?credit
+WHERE {
+  	?course dcmitype:subject "COMP" .
+    	?course dcmitype:identifier "6741" .
+	?course dcterms:title ?name .
+	?course uni:hasCredit ?credit.
+}
+
+2)Which course and topics is Robert competent in?
+SELECT ?title ?competancy
+WHERE {
+  	?firstname foaf:givenName "Robert".
+	?firstname uni:enrolledIn ?cid.
+	?cid dcterms:title ?title.
+  	?firstname dcterms:description ?competancy.
+}
+
+
+3)Which topics is covered in lecture 3 of comp 6741?
+SELECT ?topic
+WHERE {
+  	?course dcmitype:subject "COMP" .
+   	?course dcmitype:identifier "6741" .
+	?lecture dcterms:isPartOf ?course .
+  	?lecture dcmitype:identifier "3" .
+	?lecture dcterms:title ?topic
+}
+
+4)What is the outline for COMP 6721 ?
+SELECT  ?outline
+WHERE {
+  	?course dcmitype:subject "COMP" .
+  	?course dcmitype:identifier "6721" .
+  	?course uni:hasContent ?content .
+	?content dcterms:type "OUTLINE" .
+    ?content dcterms:source ?outline .
+}
+
+5)What are the recommended reading materials for INTELLIGENT SYSTEMS?
+SELECT  ?Reading
+WHERE {
+  	?courseid dcterms:title "INTELLIGENT SYSTEMS"@en.
+  	?courseid rdf:type uni:Course .	
+  	?lectureid dcterms:isPartOf ?courseid.  	
+  	?lectureid uni:hasContent ?content.
+  	?content dcterms:type "READING".
+    ?content dcterms:source ?Reading.
+}
+
+
+
+6) Who enrolled in comp 6741 and what grade they got?
+
+SELECT ?firstname ?lastName ?grade
+
+WHERE{
+  
+  	?course dcmitype:subject "COMP" .
+ 	?course dcmitype:identifier "6741".
+  	?student uni:studyAt uni:Concordia_University.
+  	?student uni:enrolledIn ?course.
+  	?student foaf:givenName ?firstname.
+  	?student foaf:familyName ?lastName.
+	?student uni:hasGot ?grade.
+}
+
+
+
+7) How many course offered in COMP Department?
+SELECT (count(?course) as ?courseCount)
+WHERE{
+  
+  	?course dcmitype:subject "COMP" .
+  	?course rdf:type uni:Course.
+  	
+}
+
+8) Is james competent in INTELLIGENT SYSTEMS?
+
+ASK{
+ 	?course dcterms:title "INTELLIGENT SYSTEMS"@en.
+  	?student uni:enrolledIn ?course.
+  	?student foaf:givenName "James".
+  	?student uni:hasGot ?grade.
+	FILTER (?grade != "F")
+}
+
+9)List common topic of COMP 6741 and comp 6721.
+SELECT DISTINCT ?topic1 ?topic2
+WHERE
+{
+	?course1 dcmitype:subject "COMP" .
+    	?course1 dcmitype:identifier "6741" .
+    	?lecture1 dcterms:isPartOf ?course1 .
+    	?lecture1  uni:Topic ?topic1 .
+  
+	?course2 dcmitype:subject "COMP" .
+   	?course2 dcmitype:identifier "6721" .
+    	?lecture2 dcterms:isPartOf ?course2 .
+    	?lecture2  uni:Topic ?topic2 .
+  	FILTER(?topic1 = ?topic2 ) .
+}
+
+10) What is the maximum credit?
+
+SELECT (MAX(?credit) as ?courseCredit)
+WHERE {
+	  ?course rdf:type uni:Course.
+	  ?course uni:hasCredit ?credit
+}
+

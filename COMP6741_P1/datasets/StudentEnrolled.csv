@@ -1,0 +1,18 @@
+﻿IDNumber,CourseId,CourseCompleted,Grades,Competencies
+1116,40355,COMP 6741,F,
+1116,32031,SOEN 6441,C-,"problems of writing and managing code. Managing code complexity and quality through a programming
+process. Self-documenting code, and documentation generation. Software configuration management. Best
+practices for writing unit tests to control code quality."
+1112,40353,COMP 6721,B+,"The course covers heuristic and adversarial searches for concrete applications. It then discusses automated
+reasoning, advanced knowledge representation and dealing with uncertainty for Artificial Intelligence
+applications. "
+1112,5605,COMP 6651,B-,"Mathematical preliminaries; Empirical and theoretical measures of algorithm efficiencies;greedy algorithms, dynamic programming, and graph algorithms; Amortized analysis; String matching algorithms and tries; Unidimensional and multidimensional search trees; NP-complete problems and approximate solutions; "
+1117,40353,COMP 6721,A-,"The course covers heuristic and adversarial searches for concrete applications. It then discusses automated
+reasoning, advanced knowledge representation and dealing with uncertainty for Artificial Intelligence
+applications. "
+1117,5567,COMP 6231,A,"This course emphasizes the principles of distributed systems in general and large-scale distributed data systems in particular, such as NoSQL systems. The emphasis will be on topics, such as processes and threads, concurrent programming, distributed interprocess communication, distributed process scheduling, virtualization, distributed file systems, the web and peer-to-peer systems, and security in distributed systems"
+1111,40355,COMP 6741,A+,"Knowledge representation and reasoning. Uncertainty and conflict resolution. Design of intelligent systems. Grammar-based, rule-based, and blackboard architectures."
+1111,40353,COMP 6721,A+,"The course covers heuristic and adversarial searches for concrete applications. It then discusses automated reasoning, advanced knowledge representation and dealing with uncertainty for Artificial Intelligence applications. "
+1115,5605,COMP 6651,C+,"Mathematical preliminaries; Empirical and theoretical measures of algorithm efficiencies;greedy algorithms, dynamic programming, and graph algorithms; Amortized analysis; String matching algorithms and tries; Unidimensional and
+multidimensional search trees; NP-complete problems and approximate solutions; "
+1115,5567,COMP 6231,A,"This course emphasizes the principles of distributed systems in general and large-scale distributed data systems in particular, such as NoSQL systems. The emphasis will be on topics, such as processes and threads, concurrent programming, distributed interprocess communication, distributed process scheduling, virtualization, distributed file systems, the web and peer-to-peer systems, and security in distributed systems"

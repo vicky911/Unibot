@@ -1,0 +1,89 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dbo: <http://www.dbpedia.org/ontology/> .
+@prefix dbr: <http://www.dbpedia.org/resource/> .
+@prefix uni: <http://uni.io/schema#> .
+@prefix unidata: <http://uni.io/data#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+
+# University
+uni:University
+    a rdfs:Class ;
+    rdfs:subClassOf dcterms:Agent ; 
+    rdfs:label "University"@en ; 
+    rdfs:comment "University information" .
+
+# Course
+uni:Course
+    a rdfs:Class ;
+    rdfs:subClassOf dcterms:Agent ; 
+    rdfs:label "Course"@en ;
+    rdfs:comment "Courses offered at University"@en .
+
+# Lectures
+uni:Lecture
+    a rdfs:Class ;
+    rdfs:subClassOf dcmitype:Event ;
+    rdfs:label "Lecture"@en ;
+    rdfs:comment "Information about lecture"@en .
+
+
+#An course can be associated with topics
+uni:Topic
+    a rdf:property ;
+    :subPropertyOf dcterms:subject ;
+    rdfs:rdfslabel "Topic"@en ;
+    rdfs:comment "URI"@en .
+
+#Course, lecture can have contents associated
+uni:hasContent
+    a rdf:property ;
+    rdfs:subClassOf dcterms:relation ;
+    rdfs:label "Content"@en ;
+	rdfs:domain uni:Lecture ;
+    rdfs:range dcterms:BibliographicResource;
+    rdfs:comment "Content associated with a course, lecture"@en .
+	
+#Student Information
+uni:Student
+    a rdf:Class;
+    rdfs:subClassOf foaf:Person;
+    rdfs:label "Student"@en;
+    rdfs:Comment "Student admitted to a University"@en.
+	
+uni:studiesAt
+	a rdf:property;
+	rdfs:subClassOf dcterms:relation ;
+	rdfs:label "study at"@en ;
+	rdfs:domain uni:Student ;
+	rdfs:range uni:University;
+	rdfs:comment "Relationship showing students enrolled at a university."@en.
+	
+uni:enrolledIn
+	a rdf:property;
+	rdfs:subClassOf dcterms:relation ;
+	rdfs:label "Enrolled in"@en ;
+	rdfs:domain uni:Student ;
+	rdfs:range uni:Course;
+	rdfs:comment "Relationship showing students enrolled in a Course."@en.
+	
+uni:hasGot
+	a rdf:property;
+	rdfs:subClassOf dcterms:relation ;
+	rdfs:label "Got"@en ;
+	rdfs:domain uni:Student ;
+	rdfs:range uni:Course;
+	rdfs:comment "Relationship showing students got grade in a Course."@en.
+	
+uni:hasCredit
+	a rdf:property;
+	rdfs:subClassOf dcterms:relation ;
+	rdfs:label "Credit"@en ;
+	rdfs:domain uni:Course ;
+	rdfs:range xsd:String;
+	rdfs:comment "Relationship showing course has credit."@en.
+	
