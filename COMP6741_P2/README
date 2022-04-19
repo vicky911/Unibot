@@ -1,0 +1,25 @@
+README
+Intelligent System - Phase 2
+
+Files:
+Dataset: all the csv files related to the project
+pdfToText.py file converts the pdf file into plain text.
+TopicGeneration.py file containts the logic to extract the Dbpedia links and Spacy POS and Label for the text files and based in that it generates the Topic.csv file.
+Rasa folder contains the all the required yml file as well as action.py file to execute specific SPARQL queris and Trained Model. (Here, we used RASA version 3.1, it requires Python version > 3.6)
+Knowledgebuilder.py: python file to generate knowledge graph
+Report: COMP_6741 Project Report.pdf
+
+#How to run
+step-1
+Place University folder in the Fuseki server /webapp folder.
+Start the Fuseki server (localhost:3030)
+Load the knowledge_base123.nt file in Apache Fuseki
+
+For Rasa Part
+execute step-1
+Start terminals(2 instances)
+In first terminal type command: rasa train (to train new model)
+if you want to use given model then ignore line 21
+then type: rasa shell
+In 2nd terminal type command: rasa run actions
+now you can execute any queries which are specified in Rasa queries file
