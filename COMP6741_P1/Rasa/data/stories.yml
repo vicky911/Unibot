@@ -1,0 +1,107 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+  - intent: hello_world
+  - action: action_hello_world
+
+- story: get competency info
+  steps:
+    - intent: comptetent_in
+    - action: q2_query
+#Query 5
+- story: get course reading
+  steps:
+    - intent: about_course_reading
+    - action: q5_query
+
+#Query 6
+- story: get course reading
+  steps:
+    - intent: about_course_grades
+    - action: q6_query
+
+#Query 7
+- story: get total course number
+  steps:
+    - intent: about_courses_offered
+    - action: q7_query
+
+#Query 8
+- story: get topic competency
+  steps:
+    - intent: about_topic_competency
+    - action: q8_query
+
+#Query 9
+- story: get maximum credit
+  steps:
+    - intent: about_maximum_credit
+    - action: q9_query
+
+#Query 10
+- story: get particular grade
+  steps:
+    - intent: about_particular_grade
+    - action: q10_query
+
+
+#Query 12
+- story: get course description
+  steps:
+    - intent: about_course_desc
+    - action: q12_query
+
+#Query 13
+- story: get lab topics
+  steps:
+    - intent: about_topics_covered_in_lab
+    - action: q13_query
+
+#Query 14
+- story: get courses covering topic
+  steps:
+    - intent: courses_covering_topic
+    - action: q14_query
+
+- story: get topic info
+  steps:
+    - intent: about_lecture_topic
+    - action: q3_query
+
+- story: get course outline
+  steps:
+    - intent: course_outline
+    - action: q4_query
+
+
+- story: get course info
+  steps:
+    - intent: about_course
+    - action: q1_query
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye

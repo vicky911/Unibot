@@ -1,0 +1,109 @@
+4/11/22, 12:42 AM COMP-474-2214-UU: Lab Session #08
+https://moodle.concordia.ca/moodle/mod/page/view.php?id=3010878 1/3
+Home / My courses /  COMP-474-2214-UU / 13 March - 19 March /  Lab Session #08
+COMP 474 UU,COMP 6741 UU 2214
+Lab Session #08
+Introduction
+Welcome to Lab #8: This week, we'll practice more machine learning with scikit-learn.
+Note: we haven't covered the theory for the kNN algorithm yet (to be completed this week), but you can already start experimenting with
+its implementation.
+Follow-up Lab #7
+Solution Task #1 (TF-IDF Vectors)
+Here's a sample program for this task from last week that prints out various intermediate steps.
+Solution Task #2 (Search)
+Here's a solution for the "re-implementation of Google"
+Solution Task #3 (k-Means)
+Here's an example solution for the first part (clustering the test sentences).
+Task #1: kNN Regression
+The goal here is to implement the kNN regression exercise from lecture Worksheet #6. To start, use the statements below to import the
+required libraries (here is a nice cheat sheet for working with scitkit-learn from Datacamp):
+import numpy as np
+from sklearn.neighbors import KNeighborsRegressor
+Now, create a dataset using the samples from the worksheet and train the dataset with the KNeighborsRegressor with n_neighbors = 2.
+dataset = np.array([[135,0,5,3],[90,123,2,5],[159,2,1,1]])
+For the feature vectors, we need the first three columns:
+X = dataset[:,0:3]
+And for the training labels, we use the last column from the dataset:
+y = dataset[:, 3]
+Create a regressor object and train the model:
+clf = KNeighborsRegressor(2)
+clf.fit(X, y)
+Make predictions on the test data features
+https://moodle.concordia.ca/moodle/
+https://moodle.concordia.ca/moodle/course/view.php?id=144446
+https://moodle.concordia.ca/moodle/mod/page/view.php?id=3010878
+https://scikit-learn.org/stable/index.html
+https://moodle.concordia.ca/moodle/pluginfile.php/5267363/mod_page/content/143/tfidf.py
+https://moodle.concordia.ca/moodle/pluginfile.php/5267363/mod_page/content/143/search.py?time=1615399266231
+https://moodle.concordia.ca/moodle/pluginfile.php/5267363/mod_page/content/143/kmeans.py
+https://datacamp-community-prod.s3.amazonaws.com/5433fa18-9f43-44cc-b228-74672efcd116
+https://www.datacamp.com/community/data-science-cheatsheets
+https://moodle.concordia.ca/moodle/mod/page/view.php?id=3010878 2/3
+test data features = [109,5,3]
+Task #2: kNN Classification
+For these experiments, we will use the kNN algorithm as discussed in the lecture. Luckily, it's already implemented for us in scitkit-learn:
+import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
+To see how this works, let's start with some real data, using one of the example datasets available with scikit-learn. Here, we will be
+using the wine dataset:
+from sklearn.datasets import load_wine
+X, y = load_wine(return_X_y=True)
+Now create the train and test data.  Use scikit-learn’s train_test_split helper function to split the wine dataset into a training and testing
+subset:
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+Here, the data is split into 80% training data and 20% testing data.
+It is always a good practice to scale the features so that all of them can be uniformly evaluated:
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+scaler.fit(X_train)
+X_train = scaler.transform(X_train)
+X_test = scaler.transform(X_test)
+Now you can "train" a classifier (for kNN, this simply stores the vectors with their labels):
+clf = KNeighborsClassifier(n_neighbors=3)
+clf.fit(X_train, y_train)
+Here, "3" is k, the number of neighbors voting when classifying unseen data (see the documentation). Note that this is a standard
+pattern when creating a ML model with scikit-learn, you can use other algorithms (e.g., Naive Bayes, SVM) in the same way.
+To make predictions on the test data:
+y_pred = clf.predict(X_test)
+Evaluate the performance of your classifier
+Now run an evaluation to compute the Precision, Recall, F1-measure, and Accuracy  of your classifier using the evaluation tools in
+scikit-learn. Finally, compute and print out the confusion matrix.
+Task #3: Project Team Meeting
+We will use the remaining time of the lab session for meetings between your TA and team members to discuss any outstanding issues
+and plan for the remaining week ahead.
+Please post any open questions you still have regarding the project in the Moodle Discussion Forum!
+https://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbors-classification
+https://scikit-learn.org/stable/datasets/toy_dataset.html#wine-dataset
+https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier
+https://scikit-learn.org/stable/modules/model_evaluation.html
+https://moodle.concordia.ca/moodle/mod/page/view.php?id=3010878 3/3
+You are logged in as Vickykumar Patel (Log out)
+COMP-474-2214-UU
+Academic Integrity
+Academic Assessment Tool
+English  (en)
+Deutsch  (de)
+Español - Internacional  (es)
+Français (Canada)  (fr_ca)
+Français  (fr)
+Italiano  (it)
+(ar)  العربیة
+That's all for this lab!
+Last modified: Monday, 14 March 2022, 3:55 PM
+◄ Worksheet #07
+Jump to...
+Lecture Slides #09 ►
+https://moodle.concordia.ca/moodle/user/profile.php?id=92517833
+https://moodle.concordia.ca/moodle/login/logout.php?sesskey=HAOvPK65ZX
+https://moodle.concordia.ca/moodle/course/view.php?id=131525
+https://moodle.concordia.ca/moodle/mod/page/view.php?id=3010878&lang=de
+https://moodle.concordia.ca/moodle/mod/page/view.php?id=3010878&lang=en
+https://moodle.concordia.ca/moodle/mod/page/view.php?id=3010878&lang=es
+https://moodle.concordia.ca/moodle/mod/page/view.php?id=3010878&lang=fr_ca
+https://moodle.concordia.ca/moodle/mod/page/view.php?id=3010878&lang=fr
+https://moodle.concordia.ca/moodle/mod/page/view.php?id=3010878&lang=it
+https://moodle.concordia.ca/moodle/mod/page/view.php?id=3010878&lang=ar
+https://moodle.concordia.ca/moodle/mod/resource/view.php?id=3010873&forceview=1
+https://moodle.concordia.ca/moodle/mod/resource/view.php?id=3010876&forceview=1

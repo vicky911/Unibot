@@ -1,0 +1,132 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - hello_world
+  - about_course
+  - comptetent_in
+  - about_lecture_topic
+  - course_outline
+  - about_course_reading
+  - about_course_grades
+  - about_courses_offered
+  - about_topic_competency
+  - about_particular_grade
+  - about_maximum_credit
+  - about_course_desc
+  - about_topics_covered_in_lab
+  - courses_covering_topic
+
+entities:
+  - course
+  - person
+  - course_number
+  - lecture_number
+  - course_name
+  - givenName
+  - familyName
+  - lab_number
+  - subject
+
+slots:
+  lab_number:
+    type: text
+    initial_value: "NA"
+    mappings:
+      - type: from_entity
+        entity: lab_number
+  subject:
+    type: text
+    initial_value: "NA"
+    mappings:
+      - type: from_entity
+        entity: subject
+  givenName:
+    type: text
+    initial_value: "NA"
+    mappings:
+      - type: from_entity
+        entity: givenName
+  familyName:
+    type: text
+    initial_value: "NA"
+    mappings:
+      - type: from_entity
+        entity: familyName
+  course_name:
+    type: text
+    initial_value: "NA"
+    mappings:
+      - type: from_entity
+        entity: course_name
+  lecture_number:
+    type: text
+    initial_value: "NA"
+    mappings:
+        - type: from_entity
+          entity: lecture_number
+  person:
+    type: text
+    initial_value: "NA"
+    mappings:
+      - type: from_entity
+        entity: person
+  course:
+    type: text
+    initial_value: "NA"
+    mappings:
+      - type: from_entity
+        entity: course
+  course_number:
+    type: text
+    initial_value: "NA"
+    mappings:
+      - type: from_entity
+        entity: course_number
+
+actions:
+  - action_hello_world
+  - q1_query
+  - q2_query
+  - q3_query
+  - q4_query
+  - q5_query
+  - q6_query
+  - q7_query
+  - q8_query
+  - q10_query
+  - q9_query
+  - q11_query
+  - q12_query
+  - q13_query
+  - q14_query
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
